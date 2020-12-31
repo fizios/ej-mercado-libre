@@ -1,0 +1,50 @@
+@import "colors";
+
+.detail-container {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+
+  .item-info {
+    display: flex;
+
+    .picture-container {
+      img {
+        width: 680px;
+      }
+    }
+
+    .info-container {
+
+      padding-left: 16px;
+
+      .state-quantity {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+      .name {
+        display: block;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 32px;
+      }
+      .price-info {
+        display: block;
+        font-size: 46px;
+        margin-bottom: 32px;
+      }
+
+      button.buy {
+        font-size: 20px;
+        background-color: $blue;
+        color: $white;
+        border-radius: 4px;
+        width: 100%;
+        border: none;
+        padding: 10px 0;
+      }
+    }
+  }
+}

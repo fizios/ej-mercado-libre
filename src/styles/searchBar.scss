@@ -1,0 +1,43 @@
+@import "colors";
+.header {
+  background-color: $yellow;
+
+  .search-bar{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 1040px;
+    margin: 0 auto;
+
+    .logo {
+      height: 75%;
+      margin-right: 30px;
+
+      img {
+        height: 100%;
+      }
+    }
+
+    .search-input {
+      width: 100%;
+
+      form {
+        display: flex;
+        height: 30px;
+        input {
+          width: 92%;
+          border: none;
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          height: 30px;
+          padding: 0 10px;
+        }
+        button {
+          width: 6%;
+          border: none;
+        }
+      }
+    }
+  }
+
+}
