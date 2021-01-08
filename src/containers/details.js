@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import Breadcrumb from "../components/breadcrumb";
 import ItemDetails from "../components/details";
 
-import { getItem } from "../action";
+import { getItem  } from "../action";
 
 const Details = props => {
   const dispatch = useDispatch();
@@ -27,5 +27,10 @@ const Details = props => {
     </React.Fragment>
   )
 };
+
+export const fetchData = (store, req, host) => {
+  const id = req.url.split("/")[2];
+  store.dispatch(getItem(id, host))
+}
 
 export default withRouter(Details);

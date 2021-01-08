@@ -1,22 +1,23 @@
-import { fork, takeLatest, call, put } from 'redux-saga/effects';
+import { fork, takeLatest, call, put, all } from 'redux-saga/effects';
 import * as types from "../constants/actionTypes";
 import { search, getDetails} from "../api"
 
-function* searchSaga({ query }) {
+function* searchSaga({ query, host }) {
   try {
-    const { data } = yield call(search, query);
-    console.log("data", data);
+    const { data } = yield call(search, query, host);
     yield put({ type: types.SEARCH_SUCCESS, data });
   } catch (error) {
+    console.log("ERROR SEARCH_FAILURE: ", error);
     yield put({ type: types.SEARCH_FAILURE, error });
   }
 }
 
-function* detailsSaga({ id }) {
+function* detailsSaga({ id, host }) {
   try {
-    const { data } = yield call(getDetails, id);
+    const { data } = yield call(getDetails, id, host);
     yield put({ type: types.GET_ITEM_SUCCESS, item: data.item });
   } catch (error) {
+    console.log("ERROR GET_ITEM_FAILURE: ", error);
     yield put({ type: types.GET_ITEM_FAILURE, error });
   }
 }
@@ -31,4 +32,10 @@ const details = function* watcherSaga() {
 export default function* root() {
   yield fork(list);
   yield fork(details);
+}
+
+export const serverSaga = function* () {
+  yield all([
+    list(),details()
+  ])
 }

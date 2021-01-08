@@ -1,16 +1,14 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware, {END} from 'redux-saga';
+import sagaMonitor from '@redux-saga/simple-saga-monitor'
 
 import reducers from "../src/reducers";
-import mySagas from "../src/sagas";
 
-const sagaMiddleware = createSagaMiddleware();
+export default function configureStore(initialState = {}) {
+  const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
+  const store = createStore(reducers, initialState, applyMiddleware(sagaMiddleware))
 
-const ConfigureStore = (initialState = {}) => {
-  const store = createStore(reducers, initialState, applyMiddleware(sagaMiddleware));
-
-  sagaMiddleware.run(mySagas);
-  return store;
+  store.runSaga = sagaMiddleware.run
+  store.close = () => store.dispatch(END)
+  return store
 }
-
-export default ConfigureStore;

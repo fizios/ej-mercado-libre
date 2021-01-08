@@ -6,7 +6,7 @@ module.exports = [
 {
   path: "/items/:id",
   exact: true,
-  component: "container/details",
+  component: "containers/details",
   renderComponent: Details
 },
 {
