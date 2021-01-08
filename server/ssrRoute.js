@@ -9,6 +9,9 @@ import Routes from "../src/routes";
 import configureStore from "./configureStore";
 import routesMap from "./routesMap";
 
+import {serverSaga} from "../src/sagas";
+
+
 module.exports = app => {
   app.get("/*", async (req, res, next) => {
     console.log(`Request URL = ${req.url}`);
@@ -25,40 +28,59 @@ module.exports = app => {
     if (staticFile) {
       req.next();
     } else {
-      const context = {};
-      const store = configureStore();
+      try {
+        const context = {};
+        const store = configureStore();
 
-      let currentRoute = routesMap.find(route => matchPath(req.url, route));
+        let currentRoute = routesMap.find(route => matchPath(req.url, route));
+        const component = await import(`../src/${currentRoute.component}`);
 
-      //FETCH
-      console.log("currentRoute", currentRoute);
-      const data = await import(`../src/${currentRoute.component}`);
-      console.log("store1", store.getState());
-      data.fetchData(store, req).then( () => {
-        console.log("store2", store.getState());
-      });
+        const jsx =
+          <Provider store={store}>
+            <StaticRouter location={req.url} context={context}>
+              <Routes />
+            </StaticRouter>
+          </Provider>
 
-
-      const reactApp = ReactDOMServer.renderToString(
-        <Provider store={store}>
-          <StaticRouter location={req.url} context={context}>
-            <Routes />
-          </StaticRouter>
-        </Provider>
-      );
-
-      const indexFile = path.resolve("build/index.html");
-      fs.readFile(indexFile, "utf8", (err, data) => {
-        if (err) {
-          const errMsg = `There is an error: ${err}`;
-          console.error(errMsg);
-          return res.status(500).send(errMsg);
+        if ( context.url ) {
+          res.redirect( context.url );
+          return;
         }
 
-        return res.send(
-          data.replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`)
-        );
-      });
+        //Run Sagas
+        store.runSaga(serverSaga).toPromise().then(() => {
+          const reactApp = ReactDOMServer.renderToString(jsx);
+          const reduxState = JSON.stringify(store.getState())
+
+          const indexFile = path.resolve("build/index.html");
+          fs.readFile(indexFile, "utf8", (err, data) => {
+            if (err) {
+              const errMsg = `There is an error: ${err}`;
+              console.error(errMsg);
+              return res.status(500).send(errMsg);
+            }
+
+            return res.send(
+              data
+                .replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`)
+                .replace('$__INITIAL_STATE__', reduxState)
+            );
+          });
+        }).catch((e) => {
+          console.log(e.message)
+          res.status(500).send(e.message)
+        })
+
+        //Dispatch action event
+        if (component.fetchData) {
+          const host = "http://" + req.get("host")
+          component.fetchData(store, req, host);
+        }
+
+        store.close();
+      } catch (e) {
+        console.log("SSR ERROR: ", e);
+      }
     }
   });
 }

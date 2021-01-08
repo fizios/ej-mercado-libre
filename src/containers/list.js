@@ -19,8 +19,6 @@ const List = ({ location }) => {
   });
   const categories = useSelector(state => state.list.categories);
 
-  console.log("LIST");
-
   return (
     <React.Fragment>
       <Breadcrumb categories={categories} />
@@ -29,11 +27,9 @@ const List = ({ location }) => {
   )
 };
 
-export const fetchData = async (store, req) => {
+export const fetchData = (store, req, host) => {
   const { q:query } = req.query;
-
-  const promises = [store.dispatch(search(query))];
-  return Promise.all(promises);
+  store.dispatch(search(query, host));
 }
 
 export default withRouter(List);

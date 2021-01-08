@@ -1,11 +1,17 @@
-import fetch from 'axios';
+import axios from 'axios';
 
-export const search = query => {
-  const url = "/api/items?q=" + query;
-  return fetch(url);
+export const search = (query, host) => {
+  let url = "/api/items?q=" + query;
+  if (host) {
+    url = host + url;
+  }
+  return axios.get(url);
 };
 
-export const getDetails = id => {
-  const url = "/api/items/" + id;
-  return fetch(url);
+export const getDetails = (id, host) => {
+  let url = "/api/items/" + id;
+  if (host) {
+    url = host + url;
+  }
+  return axios.get(url);
 };
