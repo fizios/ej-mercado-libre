@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[ SEARCH BAR ] Renders and it matches snapshot 1`] = `
+<div
+  className="header"
+>
+  <div
+    className="search-bar"
+  >
+    <div
+      className="logo"
+    >
+      <img
+        alt="Mercado Libre"
+        src="/logo.png"
+      />
+    </div>
+    <div
+      className="search-input"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          onChange={[Function]}
+          placeholder="Nunca dejes de buscar"
+          value=""
+        />
+        <button
+          type="submit"
+        >
+          <img
+            alt="Buscar"
+            src="/icons/search.png"
+          />
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;

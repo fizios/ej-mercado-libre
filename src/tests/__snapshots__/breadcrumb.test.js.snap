@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[ BREADCRUMB ] Renders and it matches snapshot 1`] = `
+<div
+  className="breadcrumb"
+>
+  <span
+    className="category-item"
+  >
+    Electrónica, Audio y Video
+     &gt; 
+  </span>
+  <span
+    className="category-item"
+  >
+    Audio
+     &gt; 
+  </span>
+  <span
+    className="category-item"
+  >
+    Radios AM/FM
+    
+  </span>
+</div>
+`;
