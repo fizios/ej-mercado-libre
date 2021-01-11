@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[ ITEM ] Renders and it matches snapshot 1`] = `
+<div
+  className="item-container"
+  onClick={[Function]}
+>
+  <div
+    className="item-data"
+  >
+    <div
+      className="picture"
+    >
+      <img
+        alt="Micrófono Fifine F-800 Condensador Negro"
+        src="http://http2.mlstatic.com/D_847685-MLA32553351853_102019-I.jpg"
+      />
+    </div>
+    <div
+      className="info-container"
+    >
+      <p
+        className="price"
+      >
+        ARS
+         
+        3970
+        <img
+          alt="free_shipping"
+          src="/icons/shipping.png"
+        />
+      </p>
+      <p
+        className="title"
+      >
+        Micrófono Fifine F-800 Condensador Negro
+      </p>
+    </div>
+  </div>
+  <div
+    className="item-location"
+  >
+    Capital Federal
+  </div>
+</div>
+`;

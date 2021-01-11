@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[ Details ] Renders and it matches snapshot 1`] = `
+<div
+  className="detail-container"
+>
+  <div
+    className="item-info"
+  >
+    <div
+      className="picture-container"
+    >
+      <img
+        alt="Micrófono Fifine F-800 Condensador Negro"
+        src="http://http2.mlstatic.com/D_847685-MLA32553351853_102019-O.jpg"
+      />
+    </div>
+    <div
+      className="info-container"
+    >
+      <span
+        className="state-quantity"
+      >
+        Nuevo
+         - 
+        150
+         vendido
+        s
+      </span>
+      <span
+        className="name"
+      >
+        Micrófono Fifine F-800 Condensador Negro
+      </span>
+      <span
+        className="price-info"
+      >
+        ARS
+         
+        3970
+      </span>
+      <button
+        className="buy"
+      >
+        Comprar
+      </button>
+    </div>
+  </div>
+  <div
+    className="item-description"
+  >
+    <h3>
+      Descripcion del producto
+    </h3>
+    <p
+      className="description"
+    >
+       
+      Con tu micrófono Fifine vas a descubrir una nueva forma de captar y emitir audios.
+
+Un formato a tu medida
+Al ser condensador, te posibilitará un resultado detallado, claro y fino. Es ideal para percusiones, guitarras, pianos, entre otros. Debido a su respuesta tan clara ante la voz, es el más elegido por los profesionales.
+       
+    </p>
+  </div>
+</div>
+`;

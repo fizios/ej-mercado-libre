@@ -7,9 +7,6 @@
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.2",
     "@redux-saga/simple-saga-monitor": "^1.1.2",
     "@svgr/webpack": "5.4.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "axios": "^0.21.1",
@@ -41,10 +38,6 @@
     "history": "^5.0.0",
     "html-webpack-plugin": "4.5.0",
     "identity-obj-proxy": "3.0.0",
-    "jest": "26.6.0",
-    "jest-circus": "26.6.0",
-    "jest-resolve": "26.6.0",
-    "jest-watch-typeahead": "0.6.1",
     "mini-css-extract-plugin": "0.11.3",
     "node-fetch": "^2.6.1",
     "node-sass": "^4.0.0",
@@ -86,8 +79,18 @@
     "@babel/preset-env": "7.10.4",
     "@babel/preset-react": "7.10.4",
     "@babel/register": "^7.11.5",
+    "@testing-library/jest-dom": "^5.11.8",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
     "babel-plugin-transform-assets": "^1.0.2",
     "concurrently": "^3.6.1",
+    "jest": "26.6.0",
+    "jest-circus": "26.6.0",
+    "jest-resolve": "26.6.0",
+    "jest-watch-typeahead": "0.6.1",
+    "react-test-renderer": "^17.0.1",
+    "sinon": "^9.2.3",
+    "supertest": "^6.0.1",
     "webpack-cli": "3.3.12",
     "webpack-node-externals": "1.7.2"
   },
@@ -119,7 +122,8 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/src"
+      "<rootDir>/src",
+      "<rootDir>/server"
     ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
@@ -128,15 +132,14 @@
     "setupFiles": [
       "react-app-polyfill/jsdom"
     ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
-    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}",
+      "<rootDir>/server/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/server/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "testEnvironment": "jsdom",
-    "testRunner": "/home/mchaparro/Documentos/ejercicio/node_modules/jest-circus/runner.js",
+    "testRunner": "<rootDir>/node_modules/jest-circus/runner.js",
     "transform": {
       "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
@@ -167,6 +170,16 @@
       "jest-watch-typeahead/filename",
       "jest-watch-typeahead/testname"
     ],
+    "setupFilesAfterEnv": ["./src/setupTests.js"],
     "resetMocks": true
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-react-jsx"
+    ]
   }
 }
