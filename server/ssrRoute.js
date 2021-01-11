@@ -63,7 +63,7 @@ module.exports = app => {
             return res.send(
               data
                 .replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`)
-                .replace('$__INITIAL_STATE__', reduxState)
+                .replace(' window.__INITIAL_STATE__ = {};', ` window.__INITIAL_STATE__ = ${reduxState};`)
             );
           });
         }).catch((e) => {

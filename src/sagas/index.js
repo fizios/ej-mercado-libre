@@ -1,10 +1,12 @@
 import { fork, takeLatest, call, put, all } from 'redux-saga/effects';
 import * as types from "../constants/actionTypes";
 import { search, getDetails} from "../api"
+import validateAuthor from "../utils/validateAuthor";
 
 function* searchSaga({ query, host }) {
   try {
     const { data } = yield call(search, query, host);
+    validateAuthor(data);
     yield put({ type: types.SEARCH_SUCCESS, data });
   } catch (error) {
     console.log("ERROR SEARCH_FAILURE: ", error);
@@ -15,6 +17,7 @@ function* searchSaga({ query, host }) {
 function* detailsSaga({ id, host }) {
   try {
     const { data } = yield call(getDetails, id, host);
+    validateAuthor(data);
     yield put({ type: types.GET_ITEM_SUCCESS, item: data.item });
   } catch (error) {
     console.log("ERROR GET_ITEM_FAILURE: ", error);
